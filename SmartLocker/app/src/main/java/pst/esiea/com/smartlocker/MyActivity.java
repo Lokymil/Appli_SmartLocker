@@ -35,22 +35,15 @@ public class MyActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch(item.getItemId()) {
-            case R.id.action_search:
-                openSearch();
-                return true;
-            case R.id.action_settings:
-                openSettings();
+            case R.id.action_about:
+                openAbout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void openSearch() {
-
-    }
-
-    private void openSettings() {
+    private void openAbout() {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);
     }

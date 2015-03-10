@@ -26,8 +26,7 @@
         </activity>
         <activity
             android:name=".About"
-            android:label="@string/title_activity_about"
-            android:parentActivityName=".MyActivity" >
+            android:label="@string/title_activity_about">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pst.esiea.com.smartlocker.MyActivity" />
