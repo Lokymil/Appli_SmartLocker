@@ -26,7 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/status"
-            android:layout_below="@+id/editText">
+            android:layout_below="@+id/edit_password">
 
             <Button
                 android:layout_width="wrap_content"
