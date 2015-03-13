@@ -44,7 +44,11 @@ public class MyActivity extends ActionBarActivity {
 
                 CharSequence text = null;
 
-                text=json.getStatus().toString();
+                try {
+                    text=json.getStatut();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 //text = aStatut;
                 // Log.d("tag name",aStatut);
@@ -65,32 +69,36 @@ public class MyActivity extends ActionBarActivity {
         protected String doInBackground(String... args) {
             Log.d(TAG, "Je rentre en JSON");
 
-            return String.valueOf(getStatus());
+            try {
+                return getStatut();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+
+        private String getStatut() throws JSONException {
+            JSONParser jParser = new JSONParser();
+            JSONArray json = jParser.getJSONFromUrl(url);
+            String aStatut = null;
+
+            Log.d(TAG, "J'ai parsé mon JSON");
+
+            for (int i = 0; i < json.length(); i++) {
+
+                JSONObject c = json.getJSONObject(i);
+                aStatut = c.getString(arduino_state);
+
+            }
+            Log.d(TAG, "le statut est :" + aStatut);
+
+            return aStatut;
 
         }
-    }
-
-
-    private String getStatus() throws JSONException {
-        JSONParser jParser = new JSONParser();
-        JSONArray json = jParser.getJSONFromUrl(url);
-        String aStatut = null;
-
-        Log.d(TAG, "J'ai parsé mon JSON");
-
-        for (int i = 0; i < json.length(); i++) {
-
-            JSONObject c = json.getJSONObject(i);
-            aStatut = c.getString(arduino_state);
-
-        }
-        Log.d(TAG,"le statut est :" + aStatut);
-
-        return aStatut;
 
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
