@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class MyActivity extends ActionBarActivity {
     private Button mButton;
-    String aStatut;
+
     private static final String url = "https://dweet.io/get/latest/dweet/for/PSTArduino";
     private static final String arduino_state = "running";
     private static final String TAG = "MyActivity";
@@ -38,24 +38,10 @@ public class MyActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
-                JSonTask json = new JSonTask();
 
-                Context context = getApplicationContext();
+                JSonTask jsonTask = new JSonTask();
+                jsonTask.execute();
 
-                CharSequence text = null;
-
-                try {
-                    text=json.getStatut();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                //text = aStatut;
-                // Log.d("tag name",aStatut);
-                Log.d(TAG, "text=" + text);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
 
 
             }
@@ -75,29 +61,60 @@ public class MyActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-            return null;
+            return "error";
         }
 
 
         private String getStatut() throws JSONException {
+            Log.d(TAG,"Je rentre dans getStatut");
             JSONParser jParser = new JSONParser();
-            JSONArray json = jParser.getJSONFromUrl(url);
-            String aStatut = null;
+            JSONObject json = jParser.getJSONFromUrl(url);
+            JSONArray with = json.getJSONArray("with");
+            JSONObject withN0 = with.getJSONObject(0);
+            JSONObject content = withN0.getJSONObject("content");
+            String aStatut = content.getString("open_close");
+
+
 
             Log.d(TAG, "J'ai parsé mon JSON");
 
-            for (int i = 0; i < json.length(); i++) {
 
-                JSONObject c = json.getJSONObject(i);
-                aStatut = c.getString(arduino_state);
+            Log.d(TAG, "le statut est :" + aStatut);
+
+            switch (aStatut){
+                case "0":
+                    aStatut = "Porte fermée !! ";
+                    break;
+                default:
+                    aStatut = "Porte ouverte !! ";
+                    break;
 
             }
+
+
             Log.d(TAG, "le statut est :" + aStatut);
 
             return aStatut;
 
         }
 
+        protected void onPostExecute(String aStatut){
+
+            Context context = getApplicationContext();
+
+            CharSequence text = aStatut;
+
+
+            //text = aStatut;
+            // Log.d("tag name",aStatut);
+            Log.d(TAG, "text=" + text);
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+
+
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
