@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Intent;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -48,7 +47,7 @@ public class MyActivity extends ActionBarActivity {
         });
     }
 
-    private class JSonTask extends AsyncTask<String, Void, String> {
+    private class JSonTask extends AsyncTask<String, Void, String>{
 
 
         @Override
@@ -144,11 +143,94 @@ public class MyActivity extends ActionBarActivity {
     }
 
 
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_password);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+    //Ph7YXtr
+    public void sendOpen(View view){
+        Opener opener = new Opener();
+        opener.execute();
+    }
+
+    public void sendClose(View view){
+        Closer closer = new Closer();
+        closer.execute();
+    }
+
+    private class Opener extends AsyncTask<Boolean, Void, Boolean>
+    {
+
+        @Override
+        protected Boolean doInBackground(Boolean... params) {
+
+            HttpPoster poster = new HttpPoster("http://81.65.225.160/deverrouillage.php");
+            EditText editText = (EditText) findViewById(R.id.edit_password);
+            String message = editText.getText().toString();
+
+            return poster.posting(message, true);
+        }
+
+        protected void onPostExecute(Boolean state){
+
+            if(state = true) {
+
+                Context context = getApplicationContext();
+
+                CharSequence text = "Ouvert ! ";
+
+                Log.d(TAG, "text=" + text);
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                Context context = getApplicationContext();
+
+                CharSequence text = "Denied";
+
+                Log.d(TAG, "text=" + text);
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
+
+        }
+    }
+
+    private class Closer extends AsyncTask<Boolean, Void, Boolean>
+    {
+
+        @Override
+        protected Boolean doInBackground(Boolean... params) {
+
+            HttpPoster poster = new HttpPoster("http://81.65.225.160/deverrouillage.php");
+            EditText editText = (EditText) findViewById(R.id.edit_password);
+            String message = editText.getText().toString();
+
+            return poster.posting(message,false);
+        }
+
+        protected void onPostExecute(Boolean state){
+
+            if(state = true) {
+
+                Context context = getApplicationContext();
+
+                CharSequence text = "Fermé ! ";
+
+                Log.d(TAG, "text=" + text);
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                Context context = getApplicationContext();
+
+                CharSequence text = "Denied";
+
+                Log.d(TAG, "text=" + text);
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
+
+        }
     }
 }
