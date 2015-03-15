@@ -52,7 +52,7 @@ public class MyActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... args) {
-            Log.d(TAG, "Je rentre en JSON");
+            //Log.d(TAG, "Je rentre en JSON");
 
             try {
                 return getStatut();
@@ -60,25 +60,30 @@ public class MyActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-            return "error";
+            return "error dans lecture JSON";
         }
 
 
         private String getStatut() throws JSONException {
-            Log.d(TAG,"Je rentre dans getStatut");
+            //Log.d(TAG,"Je rentre dans getStatut");
             JSONParser jParser = new JSONParser();
             JSONObject json = jParser.getJSONFromUrl(url);
+            //Log.d(TAG, "json OK");
             JSONArray with = json.getJSONArray("with");
+            //Log.d(TAG, "with OK");
             JSONObject withN0 = with.getJSONObject(0);
+            //Log.d(TAG, "withN0 OK");
             JSONObject content = withN0.getJSONObject("content");
-            String aStatut = content.getString("open_close");
+            //Log.d(TAG, "content OK : "+content.toString());
+            String aStatut = content.getString("open_closed");
+            //Log.d(TAG, "aStatut OK");
 
 
 
-            Log.d(TAG, "J'ai parsé mon JSON");
+            //Log.d(TAG, "J'ai parsé mon JSON");
 
 
-            Log.d(TAG, "le statut est :" + aStatut);
+            //Log.d(TAG, "le statut est :" + aStatut);
 
             switch (aStatut){
                 case "0":
@@ -91,7 +96,7 @@ public class MyActivity extends ActionBarActivity {
             }
 
 
-            Log.d(TAG, "le statut est :" + aStatut);
+            //Log.d(TAG, "le statut est :" + aStatut);
 
             return aStatut;
 
@@ -106,7 +111,7 @@ public class MyActivity extends ActionBarActivity {
 
             //text = aStatut;
             // Log.d("tag name",aStatut);
-            Log.d(TAG, "text=" + text);
+            //Log.d(TAG, "text=" + text);
             int duration = Toast.LENGTH_LONG;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
@@ -171,20 +176,15 @@ public class MyActivity extends ActionBarActivity {
 
             if(state = true) {
 
-                Context context = getApplicationContext();
+                JSonTask jsontask = new JSonTask();
+                jsontask.execute();
 
-                CharSequence text = "Ouvert ! ";
-
-                Log.d(TAG, "text=" + text);
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
             }else{
                 Context context = getApplicationContext();
 
                 CharSequence text = "Denied";
 
-                Log.d(TAG, "text=" + text);
+                //Log.d(TAG, "text=" + text);
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -211,20 +211,15 @@ public class MyActivity extends ActionBarActivity {
 
             if(state = true) {
 
-                Context context = getApplicationContext();
+                JSonTask jsontask = new JSonTask();
+                jsontask.execute();
 
-                CharSequence text = "Fermé ! ";
-
-                Log.d(TAG, "text=" + text);
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
             }else{
                 Context context = getApplicationContext();
 
                 CharSequence text = "Denied";
 
-                Log.d(TAG, "text=" + text);
+                //Log.d(TAG, "text=" + text);
                 int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

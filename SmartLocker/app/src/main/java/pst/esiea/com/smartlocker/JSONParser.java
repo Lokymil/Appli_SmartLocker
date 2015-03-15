@@ -1,6 +1,8 @@
 package pst.esiea.com.smartlocker;
 
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -19,13 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;import java.lang.String;import java.lang.StringBuilder;
 
-/**
- * Created by pierre-jean on 10/03/15.
- */
 public class JSONParser {
+    private static final String TAG = "MyActivity";
 
     static JSONObject jobject = null;
-;
 
     public JSONObject getJSONFromUrl(String url){
 
@@ -39,15 +38,22 @@ public class JSONParser {
             int statusCode = statusLine.getStatusCode();
 
             if(statusCode == 200) {
+                //Log.d(TAG, "StatusCode == 200");
                 HttpEntity entity = response.getEntity();
                 InputStream content = entity.getContent();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+
+                //Log.d(TAG,"Buffer seems to be OK");
 
                 String line;
 
                 while ((line = reader.readLine()) != null) {
                     builder.append(line+"\n");
                 }
+
+                //Log.d(TAG, builder.toString());
+
+
             }else{
 
                 }
