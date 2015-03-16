@@ -12,10 +12,11 @@
     <style name="MyActionBar"
         parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/ActionBarBackground</item>
-
+        <item name="android:icon">@mipmap/ic_launcher</item>
 
         <!-- Support library compatibility -->
         <item name="background">@color/ActionBarBackground</item>
+        <item name="icon">@mipmap/ic_launcher</item>
     </style>
 
 

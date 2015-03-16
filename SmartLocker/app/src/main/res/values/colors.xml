@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="ActionBarBackground">#1550FF</color>
+    <color name="ActionBarBackground">#0080FF</color>
+    <color name="color_button">#909090</color>
+    <color name="text_button_color">#FFFFFF</color>
+
+    //91 150 160
 
 </resources>
