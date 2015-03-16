@@ -13,4 +13,7 @@
     <string name="title_activity_about">About</string>
     <string name="text_about">Voici SmartLocker, grâce à cette application vous pourrez controler votre serrure à distance !</string>
     <string name="about_project">Cette appliccation a été créer dans le cadre du projet PST4 de l\'école ESIEA.\nIl a été mené par :\n\t- Christophe ARRESTIER\n\t- Lucien CASSAGNES\n\t- Lucas LAVILE\n\t- Pierre-Jean MESCLE\n\nCe projet proposer par Valery FARCY prendra fin le 20 mars 2015.</string>
+    <string name="title_activity_splash__screen">Splash_Screen</string>
+    <string name="title_screen">SmartLocker</string>
+    <string name="slogan">Et votre smartphone devient votre nouvelle clé !</string>
 </resources>

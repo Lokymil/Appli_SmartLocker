@@ -18,4 +18,11 @@
         <item name="background">@color/ActionBarBackground</item>
     </style>
 
+
+    <!-- the theme applied to the application or activity -->
+    <style name="CustomFullScreen" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>
